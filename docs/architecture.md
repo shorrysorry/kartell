@@ -20,11 +20,16 @@
 ```
 src/
   app/                    라우트 (App Router)
-    layout.tsx            lang=ko, viewport, 메타데이터
-    page.tsx              홈 (자리표시)
+    layout.tsx            루트: lang=ko, viewport, 메타데이터
+    (auth)/login/         카카오 로그인 (OAuth 연동 전, 버튼 비활성)
+    (main)/layout.tsx     회원 화면 공통 틀: 상단 헤더 + 하단 메뉴
+    (main)/page.tsx       홈 · games · records · community · my · notifications
     manifest.ts           PWA manifest
     icon.png, apple-icon.png
     globals.css           디자인 토큰 v0.2
+  components/
+    layout/               AppHeader · BottomNav · nav-items(+test)
+    ui/                   Button · Section · EmptyState · PageTitle
   features/               도메인별 코드
     scoring/              게임별 점수 계산 (03 문서)
       types.ts            계산 모듈 공통 계약
@@ -49,7 +54,13 @@ docs/spec/                기획 명세 원본
 | `features/notifications` | 07 알림 |
 | `features/admin` | 02 관리자 기능 |
 
-라우트는 08의 하단 메뉴(홈 · 게임 · 기록 · 커뮤니티 · MY)를 따른다. 통합 프로토타입 단계에서 만든다.
+라우트는 08의 하단 메뉴(홈 · 게임 · 기록 · 커뮤니티 · MY)를 따른다. 현재는 **뼈대만** 있다.
+
+- 각 탭은 08 IA의 섹션 제목과 빈 상태 안내만 둔다. Mock 데이터 · 상세 · 생성 흐름은 통합 프로토타입에서 붙인다.
+- 아직 없는 라우트: 신규 프로필 · 승인 대기 · 이용 제한, 게임/기록/게시글/일정 상세, 기록 생성 4단계, 관리자.
+- 인증이 없으므로 `(main)` 접근 제어도 없다. 회원 상태 분기는 인증 방식 확정 후 서버에서 처리한다 (02).
+- 공통 UI는 `components/ui`에 두고, 도메인 화면 조각은 해당 `features/<domain>`에 둔다.
+- 아이콘은 `lucide-react` (08: Lucide 스타일 선 아이콘).
 
 ## 점수 계산 모듈 규칙
 
@@ -66,7 +77,7 @@ docs/spec/                기획 명세 원본
 | Service Worker · 캐싱 | 캐싱 정책 미결, 인증 응답이 공유 캐시에 남지 않게 설계 필요 (09) | 알림·오프라인 정책 확정 후 |
 | Web Push | 알림 이벤트·채널 미결 (07) | 07 확정 후 |
 | DB · 인증 · Storage | 후보만 있음 (09) | 통합 프로토타입 검증 후 |
-| 컴포넌트 테스트 (jsdom · Testing Library) | 아직 컴포넌트 없음. jsdom 29는 Node 22.22+ 필요 | 첫 화면 구현 시 |
+| 컴포넌트 테스트 (jsdom · Testing Library) | 뼈대 컴포넌트는 표시만 함. jsdom 29는 Node 22.22+ 필요 | 상호작용이 생기는 화면 구현 시 |
 | Pretendard 웹폰트 로딩 | 현재는 설치된 경우에만 사용, 없으면 시스템 폰트 | 디자인 확정 시 |
 | 정식 아이콘 | 현재 차콜 배경 + `k` 임시본 | 디자인 확정 시 |
 | 다크 모드 | 명세는 화이트/차콜 단일 테마 | — |
