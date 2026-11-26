@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* 디자인 시스템 v0.2 (docs/spec/08-ia-ui.md) */
+:root {
+  --background: #ffffff;
+  --accent: #252b27;
+  --foreground: #171717;
+  --muted: #737373;
+  --border: #e5e5e5;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-accent: var(--accent);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 15px;
+}

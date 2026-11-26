@@ -3,7 +3,7 @@
 단일 보드게임 모임 전용 모바일 PWA.
 게임별 점수 계산, 참가자 간 플레이 기록 공유, 모임 활동 기반 업적을 제공한다.
 
-> **현재 단계: 기획 · 프로토타입.** 실제 프로젝트 초기 세팅, DB, 인증 연동, 배포는 아직 시작하지 않았다.
+> **현재 단계: 초기 세팅 완료 · 통합 프로토타입 준비.** DB, 인증 연동, 배포는 아직 시작하지 않았다.
 
 ## 핵심 결정
 
@@ -14,6 +14,21 @@
 - 게임·점수 계산기: 개발자가 코드로만 추가 (검증된 확장판 조합만 지원)
 - 커뮤니티: 자유게시판 + 일정관리(신청·출석)
 - 디자인: 화이트·차콜, 리스트 중심, 장식 최소화 (v0.2 기준)
+
+## 개발
+
+Node.js 22 (`.nvmrc`).
+
+```bash
+npm ci
+npm run dev        # http://localhost:3000
+npm run test:run   # Vitest
+npm run typecheck  # next typegen + tsc
+npm run lint
+npm run build
+```
+
+구조와 보류한 항목: [docs/architecture.md](docs/architecture.md)
 
 ## 문서
 
